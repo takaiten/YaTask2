@@ -128,10 +128,11 @@ int main()
         formats.emplace_back(NumberFormat(tmp)); // push format in vector
     }
     
-    for (auto& form : formats)          // for each format
-        for (const auto& num : numbers) // for each number
+    for (const auto& num : numbers)     // for each number
+        for (auto& form : formats)      // for each format
             if (form.match(num))        // if number fits format, then get formatted number and push it in vector
                 formatted.emplace_back(form.get_formatted_number(num));
+
     
     std::cout << std::endl;
     for (const auto& p  :formatted)
