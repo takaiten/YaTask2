@@ -27,17 +27,14 @@ protected:
     std::string operator_code;
     std::string personal_number;
     std::string name;
-    
-    size_t personal_number_count;
 public:
-    explicit NumberFormat(const std::string& format) : personal_number_count(0)
+    explicit NumberFormat(const std::string& format)
     {
         read_format(format);
     }
     
     void read_format(const std::string& format)
     {
-        personal_number_count = 0;
         country_code.clear();
         operator_code.clear();
         personal_number.clear();
@@ -60,14 +57,10 @@ public:
         
         /// personal number
         it += 2; // skip ") "
-        
         for (; *it != ' '; ++it)
-        {
-            if (*it != 'X')
-                personal_number.push_back(*it);
-            personal_number_count++;
-        }
+            personal_number.push_back(*it);
         
+        /// name
         it += 3; // skip " - "
         for (; it != format.end(); ++it)
             name.push_back(*it);
@@ -77,7 +70,7 @@ public:
     {
         int count = country_code.size()
                     + operator_code.size()
-                    + personal_number_count;
+                    + personal_number.size();
         
         if (count != number.size()) // check number and format length
             return false;
@@ -88,13 +81,14 @@ public:
         if (number.compare(country_code.size(), operator_code.size(), operator_code) != 0) // compare numbers operator code
             return false;
         
-        if (personal_number.empty()) // finally if number template is empty, then numbers satisfies format
-            return true;
-        else // else compare number template
-            return number.compare(
-                    country_code.size() + operator_code.size(),
-                    personal_number.size(), personal_number
-            ) == 0;
+        for (size_t i = 0; i < personal_number.size(); i++)
+        {
+            if (personal_number[i] == 'X')
+                continue;
+            else if (personal_number[i] != number[country_code.size() + operator_code.size() + i])
+                    return false;
+        }
+        return true;
     }
     
     std::string get_formatted_number(const std::string& number)
@@ -139,6 +133,7 @@ int main()
             if (form.match(num))        // if number fits format, then get formatted number and push it in vector
                 formatted.emplace_back(form.get_formatted_number(num));
     
+    std::cout << std::endl;
     for (const auto& p  :formatted)
         std::cout << p << std::endl;
     
