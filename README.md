@@ -38,24 +38,38 @@
 ## Примечания
 Некоторые страны могут иметь одинаковый **COUNTRY_CODE**.
 ### Пример 1
-|Ввод|Вывод|
-|---|---|
-|4|+28 (495) 1234567 - ElDorado GoldLine
-|28-49-5-123-45-67|+875 (44) 456789 - Atlantis MobTelecom
-|87544456789|+28 (495) 1234556 - ElDorado GoldLine
-|+28 (495) 123 45 56|+875 (29) 123456 - Atlantis MythCell
-|875-(29)-123456
-|3
-|+875 (29) 1XXXXX - Atlantis MythCell
-|+875 (44) 4XXXXX - Atlantis MobTelecom
-|+28 (495) XXXXXXX - ElDorado GoldLine
+#### Ввод
+```
+4
+28-49-5-123-45-67
+87544456789
++28 (495) 123 45 56
+875-(29)-123456
+3
++875 (29) 1XXXXX - Atlantis MythCell
++875 (44) 4XXXXX - Atlantis MobTelecom
++28 (495) XXXXXXX - ElDorado GoldLine
+```
+#### Вывод
+```
++28 (495) 1234567 - ElDorado GoldLine
++875 (44) 456789 - Atlantis MobTelecom
++28 (495) 1234556 - ElDorado GoldLine
++875 (29) 123456 - Atlantis MythCell
+```
 
 ### Пример 2
-|Ввод|Вывод|
-|---|---|
-|2|+1 (23) 45678 - Canada AnotherCell
-|12345678|+1 (234) 56789 - USA SomeCell
-|123456789
-|2
-|+1 (234) XXXXX - USA SomeCell
-|+1 (23) XXXXX - Canada AnotherCell
+#### Ввод
+```
+2
+12345678
+123456789
+2
++1 (234) XXXXX - USA SomeCell
++1 (23) XXXXX - Canada AnotherCell
+```
+#### Вывод
+```
++1 (23) 45678 - Canada AnotherCell
++1 (234) 56789 - USA SomeCell
+```
